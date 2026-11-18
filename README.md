@@ -8,6 +8,17 @@ The system is served by a **FastAPI** backend (Laptop 1) and used through a **Re
 > The full methodology, results and figures are in **[`reports/PathSnap_Technical_Report.pdf`](reports/PathSnap_Technical_Report.pdf)**.
 > Progress, test status and known issues are tracked in [`PROJECT_STATUS.md`](PROJECT_STATUS.md).
 
+## Team and contributions
+
+| Member | SRN | Responsibility | Main files |
+|---|---|---|---|
+| **Harsh Agarwal** | PES1UG24AM112 | Model training and comparison: seven candidate-scoring models, 5-fold GroupKFold cross-validation, metrics, model selection, Bayesian hyperparameter optimisation (Optuna) | `src/pathsnap/models.py`, `src/pathsnap/metrics.py`, `src/pathsnap/evaluation.py`, `scripts/04_train_models.py`, `scripts/05_compare_models.py`, `scripts/06_optuna.py`, `experiments/`, `artifacts/models/` |
+| **Harshit Vaish** | PES1UG24AM116 | Dataset exploration and EDA, preprocessing, route→GPS label alignment, candidate generation, feature engineering | `src/pathsnap/{io,geo,preprocessing,network,labels,features,pipeline}.py`, `scripts/01_*`–`03_*`, `results/eda/` |
+| **Harsha KR** | PES1UG24AM114 | HMM/Viterbi route reconstruction, decoder tuning, error analysis, Folium maps | `src/pathsnap/hmm.py`, `src/pathsnap/visualization.py`, `scripts/07_hmm.py`, `scripts/08_final_maps.py`, `scripts/10_analysis_figures.py`, `results/maps/` |
+| **Harsha R** | PES1UG24AM115 | FastAPI backend, React + Leaflet frontend, two-laptop deployment, testing | `backend/`, `frontend/`, `deployment/`, `tests/`, `scripts/09_*`, `scripts/11_*` |
+
+All four members wrote the technical report together (`reports/`).
+
 ## Results (student-testing trips, 10 trips; produced by the scripts below)
 
 | Model | CV Top-1 (5-fold GroupKFold) | CV Macro F1 | Student-test Top-1 | Student-test Macro F1 | Student-test log loss |

@@ -126,8 +126,14 @@ table([["Item", "Value"],
        ["Models compared", "7 (linear, probabilistic, instance-based, tree, bagging, boosting, neural)"],
        ["Validation protocol", "5-fold GroupKFold on training trips (whole trips kept together); 10 student-test trips for development comparison"],
        ["Deployment", "FastAPI on Laptop 1, React + TypeScript + Leaflet UI on Laptop 2"],
-       ["Team", "<i>[team name / members / SRNs to be filled in by the team]</i>"]],
+       ["Team", "Harsh Agarwal (PES1UG24AM112), Harshit Vaish (PES1UG24AM116), Harsha KR (PES1UG24AM114), Harsha R (PES1UG24AM115)"]],
       col_widths=[6 * cm, 10.5 * cm], caption="Summary of the submitted system (all values computed from repository outputs).")
+table([["Member", "SRN", "Responsibility"],
+       ["Harsh Agarwal", "PES1UG24AM112", "Model training and comparison (7 models, GroupKFold CV, metrics, model selection), Bayesian optimisation (Optuna)"],
+       ["Harshit Vaish", "PES1UG24AM116", "Dataset exploration and EDA, preprocessing, label alignment, candidate generation, feature engineering"],
+       ["Harsha KR", "PES1UG24AM114", "HMM/Viterbi route reconstruction, decoder tuning, error analysis, Folium maps"],
+       ["Harsha R", "PES1UG24AM115", "FastAPI backend, React + Leaflet frontend, two-laptop deployment, testing"]],
+      col_widths=[3.2 * cm, 3.2 * cm, 10.1 * cm], caption="Team members and contributions (the report was written jointly).")
 p("<b>AI-assistance disclosure.</b> An AI coding assistant (Claude) was used to help write code, run experiments and draft this report. "
   "All numbers, tables and figures were produced by executing the code in the repository; nothing was typed in by hand. "
   "The team is responsible for reviewing, understanding and being able to defend every part of it.")
