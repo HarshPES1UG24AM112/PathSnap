@@ -1,0 +1,6 @@
+[hist_gbm_tuned] fold 0 top1=0.8594 f1=0.9222 ll=0.0964 train_top1=0.9387 fit=24.1s
+[hist_gbm_tuned] fold 1 top1=0.8233 f1=0.8998 ll=0.1466 train_top1=0.9567 fit=19.6s
+[hist_gbm_tuned] fold 2 top1=0.8696 f1=0.9235 ll=0.1160 train_top1=0.8906 fit=21.5s
+[hist_gbm_tuned] fold 3 top1=0.8821 f1=0.9338 ll=0.0908 train_top1=0.9338 fit=22.1s
+[hist_gbm_tuned] fold 4 top1=0.8908 f1=0.9374 ll=0.0794 train_top1=0.9212 fit=20.4s
+[hist_gbm_tuned] CV top1=0.8651±0.0262 | ST top1=0.8744 f1=0.9284 ll=0.0878 cont=0.791 fit=24.4s inf=0.90s

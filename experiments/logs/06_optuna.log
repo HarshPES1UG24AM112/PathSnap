@@ -1,0 +1,60 @@
+[I 2026-11-18 11:10:23,566] A new study created in RDB with name: hist_gbm_top1
+[I 2026-11-18 11:10:42,867] Trial 0 finished with value: 0.8619592641501246 and parameters: {'learning_rate': 0.1, 'max_leaf_nodes': 31, 'min_samples_leaf': 40, 'l2_regularization': 0.0001, 'max_features': 1.0, 'max_iter': 300}. Best is trial 0 with value: 0.8619592641501246.
+[I 2026-11-18 11:11:37,848] Trial 1 finished with value: 0.8642543015842653 and parameters: {'learning_rate': 0.05514718587869894, 'max_leaf_nodes': 222, 'min_samples_leaf': 287, 'l2_regularization': 0.09846738873614563, 'max_features': 0.40921304830970556, 'max_iter': 200}. Best is trial 1 with value: 0.8642543015842653.
+[I 2026-11-18 11:14:47,021] Trial 2 finished with value: 0.8646779726098393 and parameters: {'learning_rate': 0.023406777359270506, 'max_leaf_nodes': 174, 'min_samples_leaf': 156, 'l2_regularization': 0.3470266988650412, 'max_features': 0.3144091460070617, 'max_iter': 800}. Best is trial 2 with value: 0.8646779726098393.
+[I 2026-11-18 11:14:58,097] Trial 3 finished with value: 0.8590918633907603 and parameters: {'learning_rate': 0.19057174434080473, 'max_leaf_nodes': 27, 'min_samples_leaf': 22, 'l2_regularization': 0.0008260808399079611, 'max_features': 0.5129695700716763, 'max_iter': 450}. Best is trial 2 with value: 0.8646779726098393.
+[I 2026-11-18 11:15:52,617] Trial 4 finished with value: 0.8640599705262675 and parameters: {'learning_rate': 0.06442237870408891, 'max_leaf_nodes': 33, 'min_samples_leaf': 164, 'l2_regularization': 0.0004982752357076451, 'max_features': 0.5045012539746527, 'max_iter': 350}. Best is trial 2 with value: 0.8646779726098393.
+[I 2026-11-18 11:16:18,831] Trial 5 finished with value: 0.8643250142093637 and parameters: {'learning_rate': 0.06877172495876586, 'max_leaf_nodes': 138, 'min_samples_leaf': 24, 'l2_regularization': 0.03725393839578886, 'max_features': 0.7146901982034297, 'max_iter': 100}. Best is trial 2 with value: 0.8646779726098393.
+[I 2026-11-18 11:17:53,346] Trial 6 finished with value: 0.864660135577385 and parameters: {'learning_rate': 0.10364734587283783, 'max_leaf_nodes': 24, 'min_samples_leaf': 13, 'l2_regularization': 5.5517216852447255, 'max_features': 0.9759424231521916, 'max_iter': 700}. Best is trial 2 with value: 0.8646779726098393.
+[I 2026-11-18 11:18:58,236] Trial 7 finished with value: 0.8635525291523132 and parameters: {'learning_rate': 0.045633479761632394, 'max_leaf_nodes': 19, 'min_samples_leaf': 230, 'l2_regularization': 0.015876781526923997, 'max_features': 0.38542676439134516, 'max_iter': 450}. Best is trial 2 with value: 0.8646779726098393.
+[I 2026-11-18 11:20:54,837] Trial 8 finished with value: 0.8645514647688657 and parameters: {'learning_rate': 0.02195199700425886, 'max_leaf_nodes': 197, 'min_samples_leaf': 32, 'l2_regularization': 0.20540519425388448, 'max_features': 0.5181977532625877, 'max_iter': 450}. Best is trial 2 with value: 0.8646779726098393.
+[I 2026-11-18 11:22:34,439] Trial 9 finished with value: 0.864977065652224 and parameters: {'learning_rate': 0.08790451384972603, 'max_leaf_nodes': 25, 'min_samples_leaf': 868, 'l2_regularization': 0.7510418138777541, 'max_features': 0.9576492590949324, 'max_iter': 750}. Best is trial 9 with value: 0.864977065652224.
+[I 2026-11-18 11:22:43,324] Trial 10 pruned. 
+[I 2026-11-18 11:24:14,096] Trial 11 finished with value: 0.8644353147626935 and parameters: {'learning_rate': 0.21330637335406263, 'max_leaf_nodes': 16, 'min_samples_leaf': 903, 'l2_regularization': 0.7249754254119877, 'max_features': 0.9104104432919284, 'max_iter': 750}. Best is trial 9 with value: 0.864977065652224.
+[I 2026-11-18 11:26:35,781] Trial 12 finished with value: 0.8644745618310459 and parameters: {'learning_rate': 0.04975149037370544, 'max_leaf_nodes': 84, 'min_samples_leaf': 859, 'l2_regularization': 1.7947445101845148, 'max_features': 0.5666559726739657, 'max_iter': 750}. Best is trial 9 with value: 0.864977065652224.
+[I 2026-11-18 11:27:37,962] Trial 13 pruned. 
+[I 2026-11-18 11:29:41,674] Trial 14 finished with value: 0.8648451390414449 and parameters: {'learning_rate': 0.03705650321262712, 'max_leaf_nodes': 66, 'min_samples_leaf': 224, 'l2_regularization': 0.6251077417682828, 'max_features': 0.9395778415845817, 'max_iter': 750}. Best is trial 9 with value: 0.864977065652224.
+[I 2026-11-18 11:31:59,810] Trial 15 finished with value: 0.8645799806409796 and parameters: {'learning_rate': 0.03120431075617727, 'max_leaf_nodes': 80, 'min_samples_leaf': 179, 'l2_regularization': 0.4900714521786128, 'max_features': 0.8270326265970646, 'max_iter': 800}. Best is trial 9 with value: 0.864977065652224.
+[I 2026-11-18 11:33:42,102] Trial 16 finished with value: 0.8648965531922815 and parameters: {'learning_rate': 0.07281032353897775, 'max_leaf_nodes': 81, 'min_samples_leaf': 726, 'l2_regularization': 0.48834889376570567, 'max_features': 0.997628215272891, 'max_iter': 550}. Best is trial 9 with value: 0.864977065652224.
+[I 2026-11-18 11:35:46,882] Trial 17 pruned. 
+[I 2026-11-18 11:38:56,459] Trial 18 finished with value: 0.8650629159386722 and parameters: {'learning_rate': 0.0704711332353967, 'max_leaf_nodes': 129, 'min_samples_leaf': 383, 'l2_regularization': 0.14269541822778609, 'max_features': 0.9706122070805189, 'max_iter': 550}. Best is trial 18 with value: 0.8650629159386722.
+[I 2026-11-18 11:41:17,194] Trial 19 finished with value: 0.864631896501383 and parameters: {'learning_rate': 0.05872460348502515, 'max_leaf_nodes': 25, 'min_samples_leaf': 389, 'l2_regularization': 0.448384604414167, 'max_features': 0.8345344232420792, 'max_iter': 700}. Best is trial 18 with value: 0.8650629159386722.
+[I 2026-11-18 11:42:35,730] Trial 20 pruned. 
+[I 2026-11-18 11:43:32,282] Trial 21 pruned. 
+[I 2026-11-18 11:45:09,105] Trial 22 finished with value: 0.864606056732374 and parameters: {'learning_rate': 0.08713873155453322, 'max_leaf_nodes': 29, 'min_samples_leaf': 289, 'l2_regularization': 0.5483791684302968, 'max_features': 0.9962683326462639, 'max_iter': 650}. Best is trial 18 with value: 0.8650629159386722.
+[I 2026-11-18 11:46:49,611] Trial 23 pruned. 
+[I 2026-11-18 11:48:12,059] Trial 24 pruned. 
+[I 2026-11-18 11:50:59,277] Trial 25 finished with value: 0.8647062317066372 and parameters: {'learning_rate': 0.05847303074149759, 'max_leaf_nodes': 169, 'min_samples_leaf': 624, 'l2_regularization': 0.22955855063568062, 'max_features': 0.8273102808406372, 'max_iter': 650}. Best is trial 18 with value: 0.8650629159386722.
+[I 2026-11-18 11:52:24,960] Trial 26 pruned. 
+[I 2026-11-18 11:54:51,658] Trial 27 pruned. 
+[I 2026-11-18 11:55:59,636] Trial 28 pruned. 
+[I 2026-11-18 11:57:39,460] Trial 29 pruned. 
+[I 2026-11-18 11:59:39,578] Trial 30 pruned. 
+[I 2026-11-18 12:01:09,806] Trial 31 pruned. 
+[I 2026-11-18 12:03:07,469] Trial 32 finished with value: 0.8648430380261203 and parameters: {'learning_rate': 0.08866823574972808, 'max_leaf_nodes': 128, 'min_samples_leaf': 774, 'l2_regularization': 0.030235085194901843, 'max_features': 0.9277349762646647, 'max_iter': 500}. Best is trial 18 with value: 0.8650629159386722.
+[I 2026-11-18 12:04:21,619] Trial 33 pruned. 
+[I 2026-11-18 12:06:14,467] Trial 34 pruned. 
+[I 2026-11-18 12:07:32,294] Trial 35 pruned. 
+[I 2026-11-18 12:08:58,110] Trial 36 pruned. 
+[I 2026-11-18 12:10:23,263] Trial 37 pruned. 
+[I 2026-11-18 12:11:58,431] Trial 38 pruned. 
+[I 2026-11-18 12:13:34,976] Trial 39 pruned. 
+{
+ "model": "hist_gbm",
+ "best_params": {
+  "learning_rate": 0.0704711332353967,
+  "max_leaf_nodes": 129,
+  "min_samples_leaf": 383,
+  "l2_regularization": 0.14269541822778609,
+  "max_features": 0.9706122070805189,
+  "max_iter": 550
+ },
+ "best_cv_top1": 0.8650629159386722,
+ "n_trials": 40,
+ "n_pruned": 20,
+ "n_complete": 20,
+ "wall_time_s": 3791.3953909873962,
+ "objective": "mean 5-fold GroupKFold observation Top-1 accuracy",
+ "sampler": "TPE(seed=42)",
+ "pruner": "MedianPruner(n_startup_trials=8, warmup=1 fold)"
+}

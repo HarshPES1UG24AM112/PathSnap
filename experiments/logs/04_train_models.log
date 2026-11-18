@@ -1,0 +1,40 @@
+[gaussian_nb] fold 0 top1=0.6150 f1=0.7823 ll=1.0022 train_top1=0.6057 fit=2.2s
+[gaussian_nb] fold 1 top1=0.4887 f1=0.6978 ll=1.9417 train_top1=0.6379 fit=2.0s
+[gaussian_nb] fold 2 top1=0.5874 f1=0.7567 ll=1.5790 train_top1=0.5831 fit=2.2s
+[gaussian_nb] fold 3 top1=0.6077 f1=0.7748 ll=1.1635 train_top1=0.6412 fit=2.2s
+[gaussian_nb] fold 4 top1=0.5490 f1=0.7410 ll=1.2285 train_top1=0.5854 fit=2.2s
+[gaussian_nb] CV top1=0.5696±0.0520 | ST top1=0.5444 f1=0.7385 ll=1.3080 cont=0.440 fit=2.6s inf=0.31s
+[decision_tree] fold 0 top1=0.8472 f1=0.9152 ll=0.1136 train_top1=0.8673 fit=12.2s
+[decision_tree] fold 1 top1=0.8210 f1=0.8984 ll=0.1623 train_top1=0.8942 fit=10.8s
+[decision_tree] fold 2 top1=0.8630 f1=0.9196 ll=0.1245 train_top1=0.8291 fit=12.2s
+[decision_tree] fold 3 top1=0.8727 f1=0.9283 ll=0.1035 train_top1=0.8674 fit=12.1s
+[decision_tree] fold 4 top1=0.8877 f1=0.9356 ll=0.0909 train_top1=0.8544 fit=11.6s
+[decision_tree] CV top1=0.8583±0.0255 | ST top1=0.8619 f1=0.9211 ll=0.1024 cont=0.763 fit=14.9s inf=0.02s
+[hist_gbm] fold 0 top1=0.8503 f1=0.9170 ll=0.0999 train_top1=0.8664 fit=4.8s
+[hist_gbm] fold 1 top1=0.8225 f1=0.8993 ll=0.1404 train_top1=0.8950 fit=3.7s
+[hist_gbm] fold 2 top1=0.8685 f1=0.9229 ll=0.1157 train_top1=0.8239 fit=3.0s
+[hist_gbm] fold 3 top1=0.8791 f1=0.9320 ll=0.0918 train_top1=0.8617 fit=2.6s
+[hist_gbm] fold 4 top1=0.8872 f1=0.9353 ll=0.0877 train_top1=0.8534 fit=3.6s
+[hist_gbm] CV top1=0.8615±0.0258 | ST top1=0.8670 f1=0.9241 ll=0.0915 cont=0.773 fit=4.6s inf=0.15s
+C:\Users\harsha\AppData\Roaming\Python\Python313\site-packages\sklearn\neural_network\_multilayer_perceptron.py:785: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (40) reached and the optimization hasn't converged yet.
+  warnings.warn(
+[mlp] fold 0 top1=0.8500 f1=0.9168 ll=0.0986 train_top1=0.8684 fit=56.1s
+[mlp] fold 1 top1=0.8172 f1=0.8961 ll=0.1557 train_top1=0.8754 fit=40.6s
+[mlp] fold 2 top1=0.8651 f1=0.9209 ll=0.1232 train_top1=0.8186 fit=26.9s
+[mlp] fold 3 top1=0.8739 f1=0.9290 ll=0.0984 train_top1=0.8667 fit=42.0s
+C:\Users\harsha\AppData\Roaming\Python\Python313\site-packages\sklearn\neural_network\_multilayer_perceptron.py:785: ConvergenceWarning: Stochastic Optimizer: Maximum iterations (40) reached and the optimization hasn't converged yet.
+  warnings.warn(
+[mlp] fold 4 top1=0.8864 f1=0.9348 ll=0.0843 train_top1=0.8571 fit=57.8s
+[mlp] CV top1=0.8585±0.0266 | ST top1=0.8744 f1=0.9284 ll=0.0923 cont=0.792 fit=59.7s inf=0.06s
+[random_forest] fold 0 top1=0.8485 f1=0.9159 ll=0.0979 train_top1=0.8725 fit=31.2s
+[random_forest] fold 1 top1=0.8238 f1=0.9001 ll=0.1358 train_top1=0.8942 fit=28.6s
+[random_forest] fold 2 top1=0.8693 f1=0.9234 ll=0.1126 train_top1=0.8367 fit=32.9s
+[random_forest] fold 3 top1=0.8765 f1=0.9305 ll=0.0915 train_top1=0.8718 fit=32.0s
+[random_forest] fold 4 top1=0.8914 f1=0.9377 ll=0.0812 train_top1=0.8587 fit=31.7s
+[random_forest] CV top1=0.8619±0.0263 | ST top1=0.8691 f1=0.9253 ll=0.0904 cont=0.777 fit=42.3s inf=0.18s
+[knn] fold 0 top1=0.8346 f1=0.9080 ll=0.1321 train_top1=0.8495 fit=0.0s
+[knn] fold 1 top1=0.8106 f1=0.8921 ll=0.2024 train_top1=0.8664 fit=0.0s
+[knn] fold 2 top1=0.8518 f1=0.9130 ll=0.1526 train_top1=0.8086 fit=0.0s
+[knn] fold 3 top1=0.8645 f1=0.9236 ll=0.1182 train_top1=0.8607 fit=0.0s
+[knn] fold 4 top1=0.8794 f1=0.9308 ll=0.1018 train_top1=0.8414 fit=0.0s
+[knn] CV top1=0.8482±0.0267 | ST top1=0.8525 f1=0.9157 ll=0.1234 cont=0.765 fit=0.0s inf=3.79s
