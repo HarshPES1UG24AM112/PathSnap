@@ -67,3 +67,19 @@
 2026-11-18 13:37:31,256 INFO pathsnap.api | GET /api/trips/00000077/network  from 127.0.0.1 -> 200 (93 ms)
 2026-11-18 13:37:35,920 INFO pathsnap.api | GET /api/health  from 127.0.0.1 -> 200 (4 ms)
 2026-11-18 13:37:36,036 INFO pathsnap.api | GET /api/trips  from 127.0.0.1 -> 200 (74 ms)
+2026-11-18 15:49:06,342 INFO pathsnap.api | model loaded: hist_gbm_tuned.joblib | HMM HMMParams(beta=40.0, lam=0.05, unreachable_logp=-25.0, backward_weight=1.0) | eval dir: C:\Users\harsha\OneDrive\Documents\ML_Hackathon\PathSnap\data\raw\student_test
+2026-11-18 15:49:06,344 INFO pathsnap.api | PathSnap API ready - 10 evaluation trips available
+2026-11-18 15:53:29,104 INFO pathsnap.api | model loaded: hist_gbm_tuned.joblib | HMM HMMParams(beta=40.0, lam=0.05, unreachable_logp=-25.0, backward_weight=1.0) | eval dir: C:\Users\harsha\OneDrive\Documents\ML_Hackathon\PathSnap\data\raw\student_test
+2026-11-18 15:53:29,106 INFO pathsnap.api | PathSnap API ready - 10 evaluation trips available
+2026-11-18 15:55:17,954 INFO pathsnap.api | GET /  from 10.30.202.211 -> 404 (1 ms)
+2026-11-18 15:55:18,260 INFO pathsnap.api | GET /favicon.ico  from 10.30.202.211 -> 404 (1 ms)
+2026-11-18 15:55:45,871 INFO pathsnap.api | GET /  from 10.30.202.211 -> 404 (1 ms)
+2026-11-18 15:56:38,819 INFO pathsnap.api | GET /api/health  from 10.30.202.211 -> 200 (7 ms)
+2026-11-18 15:58:41,258 INFO pathsnap.api | GET /api/health  from 10.30.202.211 -> 200 (7 ms)
+2026-11-18 15:58:41,576 INFO pathsnap.api | GET /api/trips  from 10.30.202.211 -> 200 (79 ms)
+2026-11-18 15:58:55,662 INFO pathsnap.api | OPTIONS /api/predict  from 10.30.202.211 -> 200 (0 ms)
+2026-11-18 15:58:55,768 INFO pathsnap.api | prediction request for trip 00000000
+2026-11-18 15:58:59,173 INFO pathsnap.api | trip 00000000: 2503 obs, 11385 candidates, route 218 arcs, 3402 ms | top1 hmm=0.9656 clf=0.9461
+2026-11-18 15:58:59,192 INFO pathsnap.api | POST /api/predict  from 10.30.202.211 -> 200 (3425 ms)
+2026-11-18 15:58:59,669 INFO pathsnap.api | trip 00000000: served from cache
+2026-11-18 15:59:00,020 INFO pathsnap.api | GET /api/trips/00000000/network  from 10.30.202.211 -> 200 (357 ms)
