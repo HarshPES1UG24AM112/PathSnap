@@ -1,0 +1,27 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.7, pytest-9.1.0, pluggy-1.6.0 -- C:\Python313\python.exe
+metadata: {'Python': '3.13.7', 'Platform': 'Windows-11-10.0.26300-SP0', 'Packages': {'pytest': '9.1.0', 'pluggy': '1.6.0'}, 'Plugins': {'anyio': '4.14.0', 'langsmith': '0.14.15', 'base-url': '2.1.0', 'html': '4.2.0', 'metadata': '3.1.1', 'playwright': '0.8.0'}, 'Base URL': ''}
+rootdir: C:\Users\harsha\OneDrive\Documents\ML_Hackathon\PathSnap
+plugins: anyio-4.14.0, langsmith-0.14.15, base-url-2.1.0, html-4.2.0, metadata-3.1.1, playwright-0.8.0
+collecting ... collected 20 items
+tests/test_api.py::test_health PASSED                                    [  5%]
+tests/test_api.py::test_trips_lists_ten PASSED                           [ 10%]
+tests/test_api.py::test_unknown_and_malformed_trip PASSED                [ 15%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000000] PASSED [ 20%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000007] PASSED [ 25%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000009] PASSED [ 30%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000040] PASSED [ 35%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000052] PASSED [ 40%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000056] PASSED [ 45%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000065] PASSED [ 50%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000076] PASSED [ 55%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000077] PASSED [ 60%]
+tests/test_api.py::test_predict_contract_and_no_leakage[00000091] PASSED [ 65%]
+tests/test_core.py::test_point_segment_and_angles PASSED                 [ 70%]
+tests/test_core.py::test_projection_matches_haversine PASSED             [ 75%]
+tests/test_core.py::test_candidates_preserve_arc_correspondence_and_no_route_needed PASSED [ 80%]
+tests/test_core.py::test_route_alignment_is_monotone PASSED              [ 85%]
+tests/test_core.py::test_viterbi_prefers_connected_route_over_noisy_argmax PASSED [ 90%]
+tests/test_core.py::test_viterbi_handles_gap_and_empty_candidates PASSED [ 95%]
+tests/test_core.py::test_invalid_rows_are_dropped PASSED                 [100%]
+============================= 20 passed in 16.47s =============================

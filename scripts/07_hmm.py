@@ -23,7 +23,7 @@ from pathsnap.preprocessing import clean_track  # noqa: E402
 
 TAG = sys.argv[1] if len(sys.argv) > 1 else "hist_gbm_tuned"
 RES = io.ROOT / "results"
-GRID = dict(beta=[1.5, 3, 5, 10, 20, 40], lam=[0.15, 0.25, 0.35, 0.5, 1.0, 2.0], unreachable_logp=[-6.0, -12.0, -25.0, -50.0])
+GRID = dict(beta=[1.5, 3, 5, 10, 20, 40], lam=[0.05, 0.1, 0.15, 0.25, 0.35, 0.5, 1.0, 2.0], unreachable_logp=[-6.0, -12.0, -25.0, -50.0])
 
 
 def trip_net(tid, part):

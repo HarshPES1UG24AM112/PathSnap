@@ -1,6 +1,6 @@
 # PathSnap — Progress Report & Viva Preparation Guide
 
-_Status as of 2026-11-18, 12:20 IST. Every number here comes from files in the repository; the source file is named next to it._
+_Status as of 2026-11-18 (final update after all experiments). Every number here comes from files in the repository; the source file is named next to it._
 
 ---
 
@@ -17,27 +17,24 @@ _Status as of 2026-11-18, 12:20 IST. Every number here comes from files in the r
 | 5 | Model comparison table + figures | ✅ Done | `scripts/05_compare_models.py`, `results/model_comparison.csv`, `results/figures/models/` |
 | 6 | Bayesian optimisation (Optuna, 40 trials) + tuned refit | ✅ Done | `scripts/06_optuna.py`, `experiments/optuna/{trials.csv,best_params.json,study.db}`, `experiments/models/hist_gbm_tuned.json` |
 | 7 | HMM/Viterbi implementation | ✅ Done | `src/pathsnap/hmm.py`, 2 unit tests |
-| 8 | HMM decoder tuning (on training trips) | ✅ Done (wider grid, 144 configs) | `results/hmm_tuning.csv`, `artifacts/hmm_config.json` |
-| 9 | Classifier-only vs HMM on student-test | ⚠️ Done with the **previous** decoder setting; needs a re-run with the final setting | `results/hmm_comparison.json`, `results/hmm_student_test_per_trip.csv` |
-| 10 | FastAPI backend | ✅ Built, smoke-tested in-process (untuned model) | `backend/app/*.py` |
-| 11 | React + TypeScript + Leaflet frontend | ✅ Builds without errors; ❌ not yet opened in a browser against the API | `frontend/src/*` |
+| 8 | HMM decoder tuning (on training trips) | ✅ Done (192 configs) | `results/hmm_tuning.csv`, `artifacts/hmm_config.json` |
+| 9 | Classifier-only vs HMM on student-test | ✅ Done with the final decoder setting | `results/hmm_comparison.json`, `results/hmm_student_test_per_trip.csv` |
+| 10 | FastAPI backend | ✅ Served the final model over HTTP; all 10 trips returned 200 | `backend/app/*.py` |
+| 11 | React + TypeScript + Leaflet frontend | ✅ Tested in a browser against the live API; no console errors | `frontend/src/*` |
 | 12 | Unit tests | ✅ 7/7 pass | `tests/test_core.py` |
-| 13 | API integration tests | ⏳ Written, not yet run with final artifacts | `tests/test_api.py` |
-| 14 | Final Folium result maps | ⏳ Script written, not run | `scripts/08_final_maps.py` |
-| 15 | Analysis figures (Optuna history, HMM grid, error taxonomy) | ⏳ Script written, not run | `scripts/10_analysis_figures.py` |
-| 16 | UI screenshots, end-to-end HTTP test on all 10 trips | ⏳ Scripts written, not run | `scripts/09_screenshots.py`, `scripts/11_e2e_api.py` |
-| 17 | Technical report PDF | ⏳ Generator written, not run (needs items 9, 14–16) | `reports/build_report.py` |
-| 18 | README, `.gitignore`, deployment scripts | ✅ Written (README results table still empty) | `README.md`, `deployment/*` |
+| 13 | API integration tests | ✅ 13/13 pass (20/20 in total) | `tests/test_api.py` |
+| 14 | Final Folium result maps | ✅ 10 maps plus screenshots | `scripts/08_final_maps.py` |
+| 15 | Analysis figures (Optuna history, HMM grid, error taxonomy) | ✅ Done | `scripts/10_analysis_figures.py` |
+| 16 | UI screenshots, end-to-end HTTP test on all 10 trips | ✅ Done (`results/e2e_api_results.csv`) | `scripts/09_screenshots.py`, `scripts/11_e2e_api.py` |
+| 17 | Technical report PDF | ✅ 20 pages (`reports/PathSnap_Technical_Report.pdf`) | `reports/build_report.py` |
+| 18 | README, `.gitignore`, deployment scripts | ✅ Done, including the README results table | `README.md`, `deployment/*` |
 | 19 | Physical two-laptop test | ❌ Cannot be done from here; the team must run it on the demo network | `deployment/` |
-| 20 | Git repo / GitHub push | ❌ Not started (no commits made) | — |
+| 20 | Git repo / GitHub push | ✅ Public: https://github.com/HarshPES1UG24AM112/PathSnap | — |
 
-### A.2 Exact next steps (in order)
-1. `python scripts/07_hmm.py hist_gbm_tuned` (≈2 min): re-runs the student-test comparison with the final decoder setting. λ = 0.15 is still at the lower edge of the grid, so first add 0.05 and 0.1 to `lam` in `GRID`.
-2. `python scripts/08_final_maps.py` and `python scripts/10_analysis_figures.py`.
-3. Start the API with `deployment\start_backend.bat`, then the UI (`cd frontend && npm run dev`). Then run `python scripts/11_e2e_api.py http://localhost:8000`, `python scripts/09_screenshots.py maps` and `python scripts/09_screenshots.py ui http://localhost:5173 00000052 00000056`.
-4. `python -m pytest -q > experiments/logs/pytest.log`
-5. `python reports/build_report.py`. Then update its text for the tuned model's train/validation gap (see C.6), fill in the README results table, update `PROJECT_STATUS.md`, and fill in the team names in the report.
-6. Commit and push to a public GitHub repository, and do a dry run on two laptops.
+### A.2 Remaining steps (team)
+1. Add the team names and SRNs to the report title page (`reports/build_report.py`), then run `python reports/build_report.py`.
+2. Do a two-laptop dry run on the demo network and screenshot Laptop 1's console showing the API logs.
+3. On demo day, point `PATHSNAP_EVAL_DIR` at the evaluator trips.
 
 ### A.3 Key results so far
 
@@ -91,23 +88,32 @@ _Status as of 2026-11-18, 12:20 IST. Every number here comes from files in the r
 
 **HMM / Viterbi**
 
-Decoder tuning was done on 39 training trips using **out-of-fold** probabilities (`results/hmm_tuning.csv`):
+Decoder tuning was done on 39 training trips using **out-of-fold** probabilities (`results/hmm_tuning.csv`, 192 settings):
 - Classifier-only Top-1: **0.8684**.
-- Best HMM: **0.9440**, with β = 10 m, λ = 0.15, unreachable log-p = −50. This is now the setting stored in `artifacts/hmm_config.json`.
+- Best HMM: **0.9449**, with β = 40 m, λ = 0.05, unreachable log-p = −25 (`artifacts/hmm_config.json`).
+- Several settings tie for the best value. What matters is a small λ (trust connectivity) and a strong unreachable penalty.
 
-On the student-test trips, measured with the previous best setting (β = 5, λ = 0.5, unreachable log-p = −25) from `results/hmm_comparison.json`:
+Student-test results with the final setting (`results/hmm_comparison.json`):
 
 | Metric | Classifier only | Classifier + HMM |
 |---|---|---|
-| Observation Top-1 | 0.8744 | **0.9360** |
-| Arc macro F1 (per-trip mean) | 0.7959 | **0.9190** |
-| Route continuity | 0.7914 | **0.9122** |
-| Disconnected arc changes | 1,141 | 319 |
-| Reconstructed-route F1 | 0.8600 | **0.9709** |
+| Observation Top-1 | 0.8744 | **0.9378** |
+| Arc macro F1 (per-trip mean) | 0.7959 | **0.9154** |
+| Route continuity | 0.791 | **0.913** |
+| Disconnected arc changes | 1,141 | 322 |
+| Reconstructed-route F1 | 0.8600 | **0.9717** |
 | Unresolved breaks after gap filling | 318 | 3 |
-| Decoding time (all 19,160 fixes) | — | 3.8 s |
+| Decoding time (all 19,160 fixes) | — | 3.6 s |
 
-The HMM improved Top-1 on **all 10** student-test trips (`results/hmm_student_test_per_trip.csv`). The smallest gain was on trip 00000000 (0.946 → 0.965) and the largest on trip 00000077, the hardest trip (0.730 → 0.837).
+The HMM improved Top-1 on **all 10** student-test trips (`results/hmm_student_test_per_trip.csv`). The hardest trip, 00000077, went from 0.730 to 0.846.
+
+Errors on the student-test trips, classifier only → with HMM (`results/error_analysis.csv`):
+- off-route: 782 → 244;
+- reverse-direction twin arc: 1,076 → 614, still 52 % of the remaining errors;
+- adjacent arc at a junction boundary: 390 → 254;
+- reference arc not among the candidates: 41 → 41.
+
+The API served all 10 trips over HTTP with the same overall Top-1 (0.9378). All 20 automated tests pass.
 
 ### A.4 Bugs found and fixed during development (worth mentioning honestly)
 1. **HMM tuning misaligned the out-of-fold (OOF) scores.** They were attached before the two unreliable trips were removed, so the lengths didn't match, every score became NaN and tuning Top-1 showed 0.0. **Fix:** apply the exclusion first, then add an assertion that the lengths match. The tuning was then re-run.
@@ -117,8 +123,7 @@ The HMM improved Top-1 on **all 10** student-test trips (`results/hmm_student_te
 - **Labels are approximate.** They come from aligning the route to the GPS points, so the exact switch point between two consecutive arcs near a node is ambiguous.
 - **Duplicated arcs** (1,903 across all trips, with identical from/to nodes) cannot be told apart.
 - **The tuned model overfits more than the untuned one.** Top-1 on training-fold trips is 0.928, against 0.865 on validation folds (untuned: 0.860 vs 0.862). Validation accuracy still improved, so the extra fit is useful but should be stated.
-- **λ = 0.15 is at the edge of the HMM grid**, so the grid should be extended once more.
-- **Not yet verified:** the two-laptop run, browser-level UI testing and the API tests with the final artifacts.
+- **Not yet verified:** the physical two-laptop run. Everything else was tested on one machine over HTTP.
 
 ---
 
@@ -213,18 +218,18 @@ All features are deterministic: nothing is fitted, so nothing can leak. Scalers 
 - boundary ambiguity at nodes;
 - the 0.17 % misses.
 
-That is exactly why the **HMM gives the big jump** (+6 points) while tuning gives a small one (+0.3 points CV).
+That is exactly why the **HMM gives the big jump** (+6.3 points) while tuning gives a small one (+0.3 points CV).
 
 ### B.9 HMM details (most likely viva topic)
 - **Hidden state at fix i:** one of its candidate arcs (a real arc id, together with the position t along it).
-- **Emission:** log e = λ·log p̂, where p̂ is the classifier probability renormalised over the fix's candidates. A small λ (0.15) means the decoder trusts connectivity strongly and the classifier mostly breaks ties.
+- **Emission:** log e = λ·log p̂, where p̂ is the classifier probability renormalised over the fix's candidates. A small λ (0.05) means the decoder trusts connectivity strongly and the classifier mostly breaks ties.
 - **Transition between consecutive fixes:**
   - **Different arcs:** d_route = (remaining length of the old arc) + (shortest directed path between them) + (distance into the new arc).
   - **Same arc:** d_route = |Δt|·L, with backward movement added as a penalty.
   - Then log T = −|d_route − d_gc| / β, where d_gc is the straight-line distance between the two fixes.
-  - **Intuition:** the distance you would have to drive between the two candidates should match how far you actually moved. β (10 m) sets how forgiving this is.
+  - **Intuition:** the distance you would have to drive between the two candidates should match how far you actually moved. β (40 m) sets how forgiving this is.
 - **Shortest path:** bounded Dijkstra on the **directed** graph (cutoff 2·d_gc + 150 m), cached per source node. Because only forward arcs are followed, one-way streets and direction are respected.
-- **Unreachable pairs** (disconnected components, one-way violations, beyond the cutoff): log T = −50, a finite penalty rather than −∞, so Viterbi never dead-ends when the network itself is broken.
+- **Unreachable pairs** (disconnected components, one-way violations, beyond the cutoff): log T = −25, a finite penalty rather than −∞, so Viterbi never dead-ends when the network itself is broken.
 - **Gaps** (Δt > 30 s or a jump > 500 m): uniform transition (log T = 0), which effectively restarts the chain. A bounded search can't know what was driven during the gap.
 - **Empty candidate set:** the fix gets no arc (−1, counted as wrong) and the chain restarts after it.
 - **Viterbi recurrence:** δ_i(c′) = log e_i(c′) + max_c [δ_{i−1}(c) + log T(c, c′)]. Store back-pointers, then backtrack from the best final state. The scores are renormalised each step for numerical stability. Complexity is O(N·K²) with K ≤ 12.
@@ -284,8 +289,8 @@ That is exactly why the **HMM gives the big jump** (+6 points) while tuning give
 
 **HMM**
 19. *States, emissions, transitions?* See B.9.
-20. *What if two consecutive fixes suggest disconnected roads?* The transition gets a −50 log penalty (not impossible). Route reconstruction fills only plausible connector paths; otherwise it reports a break.
-21. *Did the HMM help?* Yes: student-test Top-1 0.874 → 0.936, continuity 0.79 → 0.91, reconstructed-route F1 0.86 → 0.97, and it improved all 10 trips.
+20. *What if two consecutive fixes suggest disconnected roads?* The transition gets a −25 log penalty (not impossible). Route reconstruction fills only plausible connector paths; otherwise it reports a break.
+21. *Did the HMM help?* Yes: student-test Top-1 0.874 → 0.938, continuity 0.79 → 0.91, reconstructed-route F1 0.86 → 0.97, and it improved all 10 trips.
 22. *Where did it not help?* Boundary errors at nodes and missing candidates.
 23. *How were β and λ tuned without leakage?* A grid on training trips with out-of-fold probabilities.
 
@@ -304,5 +309,5 @@ That is exactly why the **HMM gives the big jump** (+6 points) while tuning give
 5. Know the headline numbers by heart:
    - nearest-arc baseline 0.54;
    - best classifier 0.874 ST / 0.865 CV;
-   - with HMM 0.936;
+   - with HMM 0.938;
    - candidate miss rate 0.17 %.

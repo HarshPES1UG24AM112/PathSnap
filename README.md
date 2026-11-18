@@ -10,7 +10,26 @@ The system is served by a **FastAPI** backend (Laptop 1) and used through a **Re
 
 ## Results (student-testing trips, 10 trips; produced by the scripts below)
 
-<!-- RESULTS_TABLE -->
+| Model | CV Top-1 (5-fold GroupKFold) | CV Macro F1 | Student-test Top-1 | Student-test Macro F1 | Student-test log loss |
+|---|---|---|---|---|---|
+| Logistic Regression | 0.8560 ± 0.0263 | 0.9181 | 0.8618 | 0.9211 | 0.1099 |
+| Gaussian Naive Bayes | 0.5696 ± 0.0520 | 0.7505 | 0.5444 | 0.7385 | 1.3080 |
+| KNN (k=50) | 0.8482 ± 0.0267 | 0.9135 | 0.8525 | 0.9157 | 0.1234 |
+| Decision Tree | 0.8583 ± 0.0255 | 0.9194 | 0.8619 | 0.9211 | 0.1024 |
+| Random Forest | 0.8619 ± 0.0263 | 0.9215 | 0.8691 | 0.9253 | 0.0904 |
+| HistGradientBoosting | 0.8615 ± 0.0258 | 0.9213 | 0.8670 | 0.9241 | 0.0915 |
+| MLP (64-32) | 0.8585 ± 0.0266 | 0.9195 | 0.8744 | 0.9284 | 0.0923 |
+| **HistGB, Optuna-tuned (final)** | 0.8651 ± 0.0262 | 0.9233 | 0.8744 | 0.9284 | 0.0878 |
+
+| Route reconstruction (student-test) | Classifier only | Classifier + HMM/Viterbi |
+|---|---|---|
+| Observation Top-1 accuracy | 0.8744 | **0.9378** |
+| Arc macro F1 | 0.7959 | **0.9154** |
+| Route continuity | 0.791 | **0.913** |
+| Reconstructed-route F1 | 0.8600 | **0.9717** |
+
+Nearest-arc baseline Top-1: 0.54. All 10 trips were served over HTTP by the API (`results/e2e_api_results.csv`), and all 20 automated tests pass (`experiments/logs/pytest.log`).
+The evaluator-testing partition was not available during development; the figures above use the student-testing trips.
 
 ## Architecture
 

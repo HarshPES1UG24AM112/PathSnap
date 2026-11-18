@@ -18,27 +18,27 @@
   "cand_miss_rate": 0.002139874739039649
  },
  "classifier_hmm": {
-  "top1": 0.9359603340292275,
-  "arc_macro_f1": 0.9190081069326481,
-  "continuity": 0.9122191179845724,
-  "route_precision": 0.9581366307984822,
-  "route_recall": 0.9055987272865764,
-  "route_f1": 0.9295234615011484,
-  "n_breaks": 319,
+  "top1": 0.937839248434238,
+  "arc_macro_f1": 0.915359625667022,
+  "continuity": 0.9126346786042279,
+  "route_precision": 0.9576065726716448,
+  "route_recall": 0.9062977178638061,
+  "route_f1": 0.9297509147663765,
+  "n_breaks": 322,
   "cand_miss_rate": 0.002139874739039649
  },
  "reconstructed_route_f1": {
   "classifier_only": 0.8600294797373982,
-  "classifier_hmm": 0.970916344750665
+  "classifier_hmm": 0.9716794127326285
  },
  "unfilled_breaks": {
   "classifier_only": 318,
   "classifier_hmm": 3
  },
- "decode_s_total": 3.764965534210205,
+ "decode_s_total": 3.5944085121154785,
  "hmm_params": {
-  "beta": 5.0,
-  "lam": 0.5,
+  "beta": 40.0,
+  "lam": 0.05,
   "unreachable_logp": -25.0,
   "backward_weight": 1.0
  }

@@ -331,9 +331,9 @@ for i, m in enumerate(base_models, 1):
         d = [a["val"]["top1"] - b["val"]["top1"] for a, b in zip(runs["random_forest"]["folds"], runs["hist_gbm"]["folds"])]
         extra = (f" Paired per-fold difference RF − HistGB in Top-1: {', '.join(f'{x:+.4f}' for x in d)} (mean {sum(d)/len(d):+.4f}), i.e. a statistical tie.")
     if m == "hist_gbm" and rj.get("history"):
-        extra = f" Early stopping ended the final fit after {len(rj['history']['train_loss'])} iterations (of 300), where the internal validation loss had flattened (Figure 10)."
+        extra = f" Early stopping ended the final fit after {len(rj['history']['train_loss'])} iterations (of 300), (patience 20 on the internal validation loss; see the training-history figure)."
     if m == "mlp" and rj.get("history"):
-        extra = f" The final refit stopped after {len(rj['history']['train_loss'])} epochs; the loss curve in Figure 10 shows training loss still decreasing slowly while validation accuracy has plateaued."
+        extra = f" The final refit stopped after {len(rj['history']['train_loss'])} epochs through early stopping (training-history figure)."
     h3(f"3.2.{i} {NICE[m]} ({r.family})")
     qa("Q1 Why suitable?", TXT[m]["why"])
     qa("Q2 Strengths and limitations.", TXT[m]["sl"])
@@ -361,7 +361,7 @@ story.append(PageBreak())
 h1("4. Bayesian hyper-parameter optimisation (HistGradientBoosting)")
 qa("Q1 Hyper-parameters searched.", "learning_rate, max_leaf_nodes, min_samples_leaf, l2_regularization, max_features (feature sub-sampling per split) and max_iter (with early stopping still active).")
 qa("Q2 Ranges / distributions.", "learning_rate log-uniform [0.02, 0.3]; max_leaf_nodes log-int [15, 255]; min_samples_leaf log-int [10, 1000]; l2_regularization log-uniform [1e-4, 10]; "
-   "max_features uniform [0.3, 1.0]; max_iter int [100, 800] step 50. The ranges bracket the defaults by roughly an order of magnitude in each direction. Log scales are used for "
+   "max_features uniform [0.3, 1.0]; max_iter int [100, 800] step 50. The ranges contain the default configuration (evaluated as trial 0). Log scales are used for "
    "scale-type parameters.")
 qa("Q3 Objective.", f"Maximise the mean observation-level Top-1 accuracy over the same 5-fold GroupKFold on the {len(tr_inv)-len(bad)} usable training trips (the primary selection "
    "metric). Student-test and evaluator data are never used inside the objective. Sampler: TPE (seed 42, 10 random start-up trials); MedianPruner stops "
@@ -373,7 +373,9 @@ u, t = tvu["hist_gbm"], tvu["hist_gbm_tuned"]
 better = t.st_top1 > u.st_top1
 qa("Q6 Did tuning help?", f"CV Top-1 rose from {u.cv_top1:.4f} to {t.cv_top1:.4f} ({t.cv_top1-u.cv_top1:+.4f}) and student-test Top-1 from {u.st_top1:.4f} to {t.st_top1:.4f} "
    f"({t.st_top1-u.st_top1:+.4f}). {'The improvement carries over to unseen trips, but it' if better else 'It does not carry over to the student-test trips; the change'} is small relative to the fold standard deviation. "
-   "This is consistent with §3: the models are limited by ambiguity in the data rather than by capacity. The tuned model is used downstream.")
+   "This is consistent with §3: the models are limited by ambiguity in the data rather than by capacity. "
+   f"The tuned model fits its training data more closely (training-fold Top-1 {runs['hist_gbm_tuned']['train_subset_mean']['top1']:.3f} vs {runs['hist_gbm']['train_subset_mean']['top1']:.3f} untuned), "
+   "but validation and student-test accuracy still rose, so the extra fit generalises. The tuned model is used downstream.")
 table([["Metric (same partitions)", "Untuned HistGB", "Tuned HistGB", "Δ"],
        ["CV Top-1 (mean ± std)", f"{u.cv_top1:.4f} ± {u.cv_top1_std:.4f}", f"{t.cv_top1:.4f} ± {t.cv_top1_std:.4f}", f"{t.cv_top1-u.cv_top1:+.4f}"],
        ["CV Macro F1", f4(u.cv_macro_f1), f4(t.cv_macro_f1), f"{t.cv_macro_f1-u.cv_macro_f1:+.4f}"],
@@ -410,7 +412,9 @@ qa("Q5 Disconnected road segments.", f"When no network path within the cutoff li
    "only when their length is plausible (≤ 2·GPS displacement + 200 m); otherwise the break is reported (unresolved_breaks) instead of inventing a detour.")
 qa("Decoder tuning.", f"β, λ and the unreachable penalty were grid-searched ({len(htune)} combinations) on {len(hcfg['tuning_trips'])} training trips, using the "
    f"<b>out-of-fold</b> probabilities of the tuned model so that no trip is decoded with a classifier that saw it. Best: β = {prm['beta']} m, λ = {prm['lam']}, "
-   f"unreachable log-p = {prm['unreachable_logp']} (Top-1 on tuning trips {hcfg['tuning_top1']:.4f} vs {hcfg['tuning_classifier_only_top1']:.4f} without the HMM).")
+   f"unreachable log-p = {prm['unreachable_logp']} (Top-1 on tuning trips {hcfg['tuning_top1']:.4f} vs {hcfg['tuning_classifier_only_top1']:.4f} without the HMM). "
+   f"{int((htune.top1 >= htune.top1.max() - 1e-9).sum())} settings tie for the best value and {int((htune.top1 >= htune.top1.max() - 0.002).sum())} are within 0.002 of it, so the result "
+   "is not sensitive to the exact choice; what matters is a small λ (trust connectivity, use the classifier mainly to break ties) and a strong unreachable penalty.")
 img(FIG / "hmm_tuning.png", 16.5, "HMM parameter grid search on training trips (out-of-fold probabilities).")
 h2("5.1 Q6 – Classifier-only vs classifier + HMM (student-test)")
 table([["Metric (10 student-test trips)", "Classifier only (arg-max)", "Classifier + HMM/Viterbi", "Δ"],
@@ -434,11 +438,13 @@ p(f"<b>Yes – HMM decoding improved the final route.</b> Top-1 rose by {100*(hh
 img(FIG / "hmm_per_trip.png", 16.5, "Per-trip Top-1 and route continuity with and without the HMM (student-test).")
 h2("5.2 Where the HMM helps and where it does not")
 e = err
-p("We put every wrong fix into one of five categories (results/error_analysis.csv, Figure 15). The HMM removes most <b>off-route</b> errors "
-  f"({int(e.loc['off-route arc','clf'])} → {int(e.loc['off-route arc','hmm'])}), where a noisy fix is closer to a parallel or crossing street that cannot be reached "
-  f"from the surrounding path. It also removes many <b>reverse-direction twin</b> errors ({int(e.loc['reverse-direction twin arc','clf'])} → {int(e.loc['reverse-direction twin arc','hmm'])}), "
-  "because a direction flip requires a U-turn that the directed transition model penalises. It helps least with <b>adjacent-arc boundary</b> errors "
-  f"({int(e.loc['adjacent arc (boundary)','clf'])} → {int(e.loc['adjacent arc (boundary)','hmm'])}). Near a node the fix is about equally close to the two consecutive arcs, both "
+red = lambda c: 1 - e.loc[c, 'hmm'] / max(e.loc[c, 'clf'], 1)
+p("We put every wrong fix into one of five categories (results/error_analysis.csv and the error-taxonomy figure). The HMM removes most <b>off-route</b> errors "
+  f"({int(e.loc['off-route arc','clf'])} → {int(e.loc['off-route arc','hmm'])}, −{100*red('off-route arc'):.0f} %), where a noisy fix is closer to a parallel or crossing street that cannot be reached "
+  f"from the surrounding path. It also removes many <b>reverse-direction twin</b> errors ({int(e.loc['reverse-direction twin arc','clf'])} → {int(e.loc['reverse-direction twin arc','hmm'])}, −{100*red('reverse-direction twin arc'):.0f} %), "
+  "because a direction flip requires a U-turn that the directed transition model penalises. Twin errors nevertheless remain the largest category after decoding "
+  f"({100*e.loc['reverse-direction twin arc','share_hmm']:.0f} % of the remaining errors): on short stretches both directions fit the GPS equally well. It helps least with <b>adjacent-arc boundary</b> errors "
+  f"({int(e.loc['adjacent arc (boundary)','clf'])} → {int(e.loc['adjacent arc (boundary)','hmm'])}, −{100*red('adjacent arc (boundary)'):.0f} %). Near a node the fix is about equally close to the two consecutive arcs, both "
   "transitions are feasible, and the 'correct' answer depends on where the monotone label alignment put the switch. These are label-resolution "
   f"errors more than routing errors. Fixes whose reference arc is <b>not in the candidate set</b> ({int(e.loc['reference not in candidates','hmm'])}) cannot be "
   "recovered by any decoder. When the classifier is already confident and the network is simple (e.g. motorway trips), the HMM changes little.")
